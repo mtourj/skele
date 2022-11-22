@@ -1,6 +1,6 @@
 {
   "name": "@skele/components",
-  "version": "1.0.0-alpha.40",
+  "version": "1.0.0-alpha.41",
   "description": "Skele custom components for React and React Native.",
   "react-native": "src/index.js",
   "main": "dist/es5/index.js",
@@ -21,8 +21,8 @@
   },
   "homepage": "https://netcetera.gitbooks.io/skele/",
   "peerDependencies": {
-    "prop-types": "15.x || 16.x",
-    "react": "15.x || 16.x",
+    "prop-types": ">= 15.0",
+    "react": ">= 15.0",
     "react-native": ">= 0.40.0"
   },
   "publishConfig": {
