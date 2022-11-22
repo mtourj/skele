@@ -1,6 +1,6 @@
 {
   "name": "@mtourj/skele-components",
-  "version": "1.0.0-alpha.41",
+  "version": "1.0.0-alpha.42",
   "description": "Skele custom components for React and React Native.",
   "react-native": "src/index.js",
   "main": "dist/es5/index.js",
