@@ -1,14 +1,13 @@
 'use strict'
 
 import React from 'react'
-import { UIManager, findNodeHandle } from 'react-native'
 import PropTypes from 'prop-types'
 import * as Utils from '../utils'
 
 export default WrappedComponent => {
   return class extends React.Component {
-    constructor(props, context) {
-      super(props, context)
+    constructor(props) {
+      super(props)
       this.state = {
         componentOffsetX: null,
         componentOffsetY: null,
@@ -34,7 +33,7 @@ export default WrappedComponent => {
 
     _onViewportChange = info => {
       this._lastInfo = info
-      if (!this.nodeHandle) return
+      if (!this.wrappedComponentRef) return
       if (
         info.shouldMeasureLayout ||
         this.state.componentOffsetX == null ||
@@ -43,10 +42,9 @@ export default WrappedComponent => {
         this.state.componentHeight == null
       ) {
         if (!this._isMounted) return
-        UIManager.measureLayout(
+        this.wrappedComponentRef.measureLayout(
           this.nodeHandle,
           info.parentHandle,
-          () => {},
           (offsetX, offsetY, width, height) => {
             if (!this._isMounted) return
             const inVerticalViewport = Utils.isInViewport(
@@ -113,7 +111,7 @@ export default WrappedComponent => {
           {...this.props}
           inViewport={this.state.inViewport}
           ref={ref => {
-            this.nodeHandle = findNodeHandle(ref)
+            this.wrappedComponentRef = ref
             this.props.innerRef && this.props.innerRef(ref)
           }}
         />

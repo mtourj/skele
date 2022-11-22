@@ -1,5 +1,17 @@
 'use strict'
 
+import { View } from 'react-native'
+
+/**
+ * Modified with patch-package
+ *
+ * Since using UIManager.measureLayout is deprecated and doesn't work on the web, we
+ * refactor ViewportAware to call .measureLayout on the wrapping component's ref.
+ * This means that the wrapping component can't just be any component, it has to be
+ * one of the few native components with a measureLayout function available on it, so
+ * for that reason we export a ViewportAwareView instead of the ViewportAware HOC.
+ */
+
 import ViewportTracker from './viewport/tracker'
 import ViewportAware from './viewport/aware'
 import WithPlaceholder from './viewport/withPlaceholder'
@@ -11,11 +23,13 @@ const Viewport = {
   WithPlaceholder: WithPlaceholder,
 }
 
+const ViewportAwareView = ViewportAware(View)
+
 const Mixins = {
   WithEvents,
 }
 
-export { Viewport, Mixins }
+export { ViewportAwareView, Viewport, Mixins }
 
 export default {
   Viewport,
